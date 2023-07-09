@@ -37,6 +37,12 @@
         <el-form-item class="btnitem">
           <el-button @click="btnSendHandler()">发送</el-button> </el-form-item
         ><br />
+
+        <el-form-item>
+          <el-button @click="goto1()">p2p1.0</el-button>
+        </el-form-item><el-form-item>
+        <el-button @click="goto2()">视频</el-button>
+      </el-form-item>
       </el-form>
     </div>
     <!-- <el-button @click="test()">test</el-button> -->
@@ -49,6 +55,11 @@
       </div>
       <br /><br /><br /><br /><br /><br /><br />
     </div>
+    <div>
+      
+    </div>
+
+
     <div class="bottom" v-show="showinfo">
       <el-input class="bottominput" v-model="message"  @keyup.enter="btnSendHandler()" ></el-input>
       <el-button class="bottombtn" @click="btnSendHandler()">发送</el-button>
@@ -58,8 +69,9 @@
 
 <script setup>
 import Peer from "peerjs";
-import { ref, computed, reactive } from "vue";
+import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
+import {useRouter} from "vue-router";
 //状态
 let isloading = ref(true);
 let shownameset = ref(true);
@@ -93,7 +105,7 @@ peer.on("open", (id) => {
 });
 // 连接出错
 peer.on("error", (e) => {
-  console.log("on error: ", e);
+  console.log("报错了！ ", e);
 });
 // 主动连接
 function doconn(targ = targID.value.trim()) {
@@ -217,10 +229,17 @@ function showMessage(msg, type = "info") {
 
 let connall = setInterval(()=>{
   conflist(connidlist());
-},10000)
+},1000)
 
 function test() {
   showMessage("test");
+}
+const router = useRouter();
+function goto1(){
+  router.push('/about')
+}
+function goto2(){
+  router.push('/call')
 }
 
 function getuuid(m = "xxxx") {

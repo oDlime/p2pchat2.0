@@ -111,9 +111,6 @@ function getuuid() {
     });
     return uuid;
 }
-function test(){
-  console.log(getuuid());
-}
 
 </script>
 
