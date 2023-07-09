@@ -11,13 +11,13 @@
       >
     </div>
     <div class="info" v-show="!showinfo">
-      <br><br>
+      <br /><br />
       <span>ID:{{ lastID }}</span
       >&nbsp;&nbsp;
       <span>连接数：{{ conncount }}</span>
       <br /><br />
       <el-form size="small" inline label-width="50">
-        <el-form-item label="连接ID" >
+        <el-form-item label="连接ID">
           <el-input class="input" v-model="targID"> </el-input>
         </el-form-item>
         <el-form-item class="btnitem">
@@ -39,10 +39,13 @@
         ><br />
 
         <el-form-item>
-          <el-button @click="goto1()">p2p1.0</el-button>
-        </el-form-item><el-form-item>
-        <el-button @click="goto2()">视频</el-button>
-      </el-form-item>
+          <el-button @click="goto1()">p2p1.0</el-button> </el-form-item
+        ><el-form-item>
+          <el-button @click="goto2()">视频</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="invite()">邀请</el-button>
+        </el-form-item>
       </el-form>
     </div>
     <!-- <el-button @click="test()">test</el-button> -->
@@ -55,13 +58,14 @@
       </div>
       <br /><br /><br /><br /><br /><br /><br />
     </div>
-    <div>
-      
-    </div>
-
+    <div></div>
 
     <div class="bottom" v-show="showinfo">
-      <el-input class="bottominput" v-model="message"  @keyup.enter="btnSendHandler()" ></el-input>
+      <el-input
+        class="bottominput"
+        v-model="message"
+        @keyup.enter="btnSendHandler()"
+      ></el-input>
       <el-button class="bottombtn" @click="btnSendHandler()">发送</el-button>
     </div>
   </div>
@@ -71,7 +75,7 @@
 import Peer from "peerjs";
 import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 //状态
 let isloading = ref(true);
 let shownameset = ref(true);
@@ -83,6 +87,7 @@ let ruleID = computed(() => {
   return baseID.value + lastID.value;
 });
 let name = ref("");
+let autotargID = ref("");
 let targID = ref("");
 let conncount = ref(0);
 let connlist = new Map();
@@ -98,11 +103,24 @@ let message = ref("");
 let msglist = ref([]);
 let perid = ref("");
 let peer = new Peer(ruleID.value);
+
 // 初始化 分配ID
 peer.on("open", (id) => {
   console.log("Peer连接ID: " + id);
   isloading.value = false;
+  // 根据URL自动连接
+  autotargID.value = window.location.href.split("?")[1];
+  if (autotargID.value&&autotargID.value.length==4) {
+    doconn(autotargID.value);
+  }
 });
+// 邀请加入
+function invite(){
+  let data = window.location.href.split('?')[0].split('/')[2]+'?'+lastID.value
+  navigator.clipboard.writeText(data)
+  showMessage("保存至剪切板","success")
+}
+
 // 连接出错
 peer.on("error", (e) => {
   console.log("报错了！ ", e);
@@ -117,7 +135,7 @@ function doconn(targ = targID.value.trim()) {
   }
   let conn = peer.connect(baseID.value + targ);
   conn.on("open", () => {
-    console.log("我主动连接了别人", conn.peer.substr(-4));
+    console.log("我主动连接了", conn.peer.substr(-4));
     connlist.set(conn.peer.substr(-4), conn);
     sendConnidlist();
   });
@@ -227,19 +245,19 @@ function showMessage(msg, type = "info") {
   });
 }
 
-let connall = setInterval(()=>{
+let connall = setInterval(() => {
   conflist(connidlist());
-},1000)
+}, 1000);
 
 function test() {
   showMessage("test");
 }
 const router = useRouter();
-function goto1(){
-  router.push('/about')
+function goto1() {
+  router.push("/about");
 }
-function goto2(){
-  router.push('/call')
+function goto2() {
+  router.push("/call");
 }
 
 function getuuid(m = "xxxx") {
@@ -303,7 +321,6 @@ function getuuid(m = "xxxx") {
 .topinfo .btn {
   background: #141414;
 }
-.btnitem{
-  
+.btnitem {
 }
 </style>
