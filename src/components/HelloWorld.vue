@@ -16,16 +16,16 @@
       <span>连接数：{{ conncount }}</span>
       <br /><br />
       <el-form size="small" inline label-width="50">
-        <el-form-item label="连接ID">
+        <el-form-item label="连接ID" >
           <el-input class="input" v-model="targID"> </el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="btnitem">
           <el-button @click="doconn()">连接</el-button> </el-form-item
         ><br />
         <el-form-item label="昵称" v-show="shownameset">
           <el-input class="input" v-model="name"></el-input>
         </el-form-item>
-        <el-form-item v-show="shownameset">
+        <el-form-item v-show="shownameset" class="btnitem">
           <el-button @click="shownameset = false"
             >保存</el-button
           > </el-form-item
@@ -33,7 +33,7 @@
         <el-form-item label="信息">
           <el-input class="input" v-model="message"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="btnitem">
           <el-button @click="btnSendHandler()">发送</el-button> </el-form-item
         ><br />
       </el-form>
@@ -239,7 +239,7 @@ function getuuid(m = "xxxx") {
   overflow: hidden;
 }
 .input {
-  width: 160px;
+  width: 100px;
 }
 .info {
 }
@@ -277,5 +277,8 @@ function getuuid(m = "xxxx") {
 }
 .topinfo .btn {
   background: #141414;
+}
+.btnitem{
+  
 }
 </style>
