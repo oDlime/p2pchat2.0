@@ -15,7 +15,7 @@
       >&nbsp;&nbsp;
       <span>连接数：{{ conncount }}</span>
       <br /><br />
-      <el-form size="small" inline label-width="100">
+      <el-form size="small" inline label-width="50">
         <el-form-item label="连接ID">
           <el-input class="input" v-model="targID"> </el-input>
         </el-form-item>
