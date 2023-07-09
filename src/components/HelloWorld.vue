@@ -3,13 +3,12 @@
     <div class="topinfo">
       <el-button @click="showinfo = !showinfo" size="small" class="btn">
         <span v-show="showinfo">展开</span>
-        <span v-show="!showinfo">折叠</span>
-      </el-button><br>
+        <span v-show="!showinfo">折叠</span> </el-button
+      ><br />
       <span v-show="showinfo"
         >ID：{{ lastID }} <br />
         连接数：{{ conncount }}</span
       >
-      
     </div>
     <div class="info" v-show="!showinfo">
       <span>ID:{{ lastID }}</span

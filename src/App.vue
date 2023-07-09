@@ -27,4 +27,17 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+ ::-webkit-scrollbar
+{
+    width:2px;
+    height:1px;
+    background-color:#f5f5f51c;
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius:2px;
+    background-color:#6e6e6e;
+}
+
+
 </style>
