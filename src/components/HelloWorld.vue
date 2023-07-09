@@ -206,6 +206,7 @@ window.addEventListener("keydown", (event) => {
     btnSendHandler();
   }
 });
+// 显示信息
 function showMessage(msg, type = "info") {
   ElMessage({
     showClose: true,
@@ -213,6 +214,10 @@ function showMessage(msg, type = "info") {
     type: type,
   });
 }
+
+let connall = setInterval(()=>{
+  conflist(connidlist());
+},10000)
 
 function test() {
   showMessage("test");
