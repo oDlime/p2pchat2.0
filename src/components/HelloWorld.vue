@@ -50,7 +50,7 @@
       <br /><br /><br /><br /><br /><br /><br />
     </div>
     <div class="bottom" v-show="showinfo">
-      <el-input class="bottominput" v-model="message"></el-input>
+      <el-input class="bottominput" v-model="message"  @keyup.enter="btnSendHandler()" ></el-input>
       <el-button class="bottombtn" @click="btnSendHandler()">发送</el-button>
     </div>
   </div>
