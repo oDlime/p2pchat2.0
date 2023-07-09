@@ -11,6 +11,7 @@
       >
     </div>
     <div class="info" v-show="!showinfo">
+      <br><br>
       <span>ID:{{ lastID }}</span
       >&nbsp;&nbsp;
       <span>连接数：{{ conncount }}</span>
